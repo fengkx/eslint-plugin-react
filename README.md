@@ -314,6 +314,7 @@ module.exports = [
 |  | 🔧 |  | [react/no-invalid-html-attribute](docs/rules/no-invalid-html-attribute.md) | Disallow usage of invalid attributes |
 | ✔ |  |  | [react/no-is-mounted](docs/rules/no-is-mounted.md) | Disallow usage of isMounted |
 |  |  |  | [react/no-multi-comp](docs/rules/no-multi-comp.md) | Disallow multiple component definition per file |
+|  |  |  | [react/no-object-type-as-default-prop](docs/rules/no-object-type-as-default-prop.md) | Prevent usage of object types variables as default param in functional component |
 |  |  |  | [react/no-namespace](docs/rules/no-namespace.md) | Enforce that namespaces are not used in React elements |
 |  |  |  | [react/no-redundant-should-component-update](docs/rules/no-redundant-should-component-update.md) | Disallow usage of shouldComponentUpdate when extending React.PureComponent |
 | ✔ |  |  | [react/no-render-return-value](docs/rules/no-render-return-value.md) | Disallow usage of the return value of ReactDOM.render |

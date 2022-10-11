@@ -167,23 +167,6 @@ ruleTester.run('no-object-type-as-default-prop', rule, {
             i = Symbol('foo')
           }) {}
         `,
-      parser: parsers.BABEL_ESLINT,
-      errors: expectedViolations,
-    },
-    {
-      code: `
-          function Foo({
-            a = {},
-            b = ['one', 'two'],
-            c = /regex/i,
-            d = () => {},
-            e = function() {},
-            f = class {},
-            g = new Thing(),
-            h = <Thing />,
-            i = Symbol('foo')
-          }) {}
-        `,
       parser: parsers.TYPESCRIPT_ESLINT,
       errors: expectedViolations,
     },
@@ -202,23 +185,6 @@ ruleTester.run('no-object-type-as-default-prop', rule, {
           }) => {}
         `,
       errors: expectedViolations,
-    },
-    {
-      code: `
-          const Foo = ({
-            a = {},
-            b = ['one', 'two'],
-            c = /regex/i,
-            d = () => {},
-            e = function() {},
-            f = class {},
-            g = new Thing(),
-            h = <Thing />,
-            i = Symbol('foo')
-          }) => {}
-        `,
-      errors: expectedViolations,
-      parser: parsers.BABEL_ESLINT,
     },
     {
       code: `

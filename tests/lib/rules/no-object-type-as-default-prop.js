@@ -17,15 +17,15 @@ const parserOptions = {
   ecmaVersion: 2018,
   sourceType: 'module',
   ecmaFeatures: {
-    jsx: true
-  }
+    jsx: true,
+  },
 };
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({parserOptions});
+const ruleTester = new RuleTester({ parserOptions });
 const MESSAGE_ID = 'forbiddenTypeDefaultParam';
 
 const expectedViolations = [
@@ -33,65 +33,65 @@ const expectedViolations = [
     messageId: MESSAGE_ID,
     data: {
       propName: 'a',
-      forbiddenType: 'object literal'
-    }
+      forbiddenType: 'object literal',
+    },
   },
   {
     messageId: MESSAGE_ID,
     data: {
       propName: 'b',
-      forbiddenType: 'array literal'
-    }
+      forbiddenType: 'array literal',
+    },
   },
   {
     messageId: MESSAGE_ID,
     data: {
       propName: 'c',
-      forbiddenType: 'regex literal'
-    }
+      forbiddenType: 'regex literal',
+    },
   },
   {
     messageId: MESSAGE_ID,
     data: {
       propName: 'd',
-      forbiddenType: 'arrow function'
-    }
+      forbiddenType: 'arrow function',
+    },
   },
   {
     messageId: MESSAGE_ID,
     data: {
       propName: 'e',
-      forbiddenType: 'function expression'
-    }
+      forbiddenType: 'function expression',
+    },
   },
   {
     messageId: MESSAGE_ID,
     data: {
       propName: 'f',
-      forbiddenType: 'class expression'
-    }
+      forbiddenType: 'class expression',
+    },
   },
   {
     messageId: MESSAGE_ID,
     data: {
       propName: 'g',
-      forbiddenType: 'construction expression'
-    }
+      forbiddenType: 'construction expression',
+    },
   },
   {
     messageId: MESSAGE_ID,
     data: {
       propName: 'h',
-      forbiddenType: 'JSX element'
-    }
+      forbiddenType: 'JSX element',
+    },
   },
   {
     messageId: MESSAGE_ID,
     data: {
       propName: 'i',
-      forbiddenType: 'Symbol literal'
-    }
-  }
+      forbiddenType: 'Symbol literal',
+    },
+  },
 ];
 
 ruleTester.run('no-object-type-as-default-prop', rule, {
@@ -134,7 +134,7 @@ ruleTester.run('no-object-type-as-default-prop', rule, {
     // React component or not, so we simply skip it
     // to prevent false positive
     export default function({foo = {}}) {}
-  `
+  `,
   ],
   invalid: [
     {
@@ -151,7 +151,7 @@ ruleTester.run('no-object-type-as-default-prop', rule, {
             i = Symbol('foo')
           }) {}
         `,
-      errors: expectedViolations
+      errors: expectedViolations,
     },
     {
       code: `
@@ -168,7 +168,7 @@ ruleTester.run('no-object-type-as-default-prop', rule, {
           }) {}
         `,
       parser: parsers.BABEL_ESLINT,
-      errors: expectedViolations
+      errors: expectedViolations,
     },
     {
       code: `
@@ -185,23 +185,7 @@ ruleTester.run('no-object-type-as-default-prop', rule, {
           }) {}
         `,
       parser: parsers.TYPESCRIPT_ESLINT,
-      errors: expectedViolations
-    },
-    {
-      code: `
-          const Foo = ({
-            a = {},
-            b = ['one', 'two'],
-            c = /regex/i,
-            d = () => {},
-            e = function() {},
-            f = class {},
-            g = new Thing(),
-            h = <Thing />,
-            i = Symbol('foo')
-          }) => {}
-        `,
-      errors: expectedViolations
+      errors: expectedViolations,
     },
     {
       code: `
@@ -218,7 +202,6 @@ ruleTester.run('no-object-type-as-default-prop', rule, {
           }) => {}
         `,
       errors: expectedViolations,
-      parser: parsers.BABEL_ESLINT
     },
     {
       code: `
@@ -235,7 +218,24 @@ ruleTester.run('no-object-type-as-default-prop', rule, {
           }) => {}
         `,
       errors: expectedViolations,
-      parser: parsers.TYPESCRIPT_ESLINT
-    }
-  ]
+      parser: parsers.BABEL_ESLINT,
+    },
+    {
+      code: `
+          const Foo = ({
+            a = {},
+            b = ['one', 'two'],
+            c = /regex/i,
+            d = () => {},
+            e = function() {},
+            f = class {},
+            g = new Thing(),
+            h = <Thing />,
+            i = Symbol('foo')
+          }) => {}
+        `,
+      errors: expectedViolations,
+      parser: parsers.TYPESCRIPT_ESLINT,
+    },
+  ],
 });

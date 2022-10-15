@@ -99,35 +99,51 @@ ruleTester.run('no-object-type-as-default-prop', rule, {
     `
       function Foo({
         bar = emptyFunction,
-      }) {}
+      }) {
+        return null;
+      }
   `,
     `
     function Foo({
       bar = emptyFunction,
       ...rest
-    }) {}
+    }) {
+      return null;
+    }
   `,
     `
     function Foo({
       bar = 1,
       baz = 'hello',
-    }) {}
-  `,
-    `
-    function Foo(props) {}
-  `,
-    `
-    function Foo(props) {}
-
-    Foo.defaultProps = {
-      bar: () => {}
+    }) {
+      return null;
     }
   `,
     `
-    const Foo = () => {};
+    function Foo(props) {
+      return null;
+    }
   `,
     `
-    const Foo = ({bar = 1}) => {};
+    function Foo(props) {
+      return null;
+    }
+
+    Foo.defaultProps = {
+      bar: () => {
+        return null;
+      }
+    }
+  `,
+    `
+    const Foo = () => {
+      return null;
+    };
+  `,
+    `
+    const Foo = ({bar = 1}) => {
+      return null;
+    };
   `,
     `
     // It's hard to tell if an anonymous function is a
@@ -149,7 +165,9 @@ ruleTester.run('no-object-type-as-default-prop', rule, {
             g = new Thing(),
             h = <Thing />,
             i = Symbol('foo')
-          }) {}
+          }) {
+            return null;
+          }
         `,
       errors: expectedViolations,
     },
@@ -165,7 +183,9 @@ ruleTester.run('no-object-type-as-default-prop', rule, {
             g = new Thing(),
             h = <Thing />,
             i = Symbol('foo')
-          }) {}
+          }) {
+            return null;
+          }
         `,
       parser: parsers.TYPESCRIPT_ESLINT,
       errors: expectedViolations,
@@ -182,7 +202,9 @@ ruleTester.run('no-object-type-as-default-prop', rule, {
             g = new Thing(),
             h = <Thing />,
             i = Symbol('foo')
-          }) => {}
+          }) => {
+            return null;
+          }
         `,
       errors: expectedViolations,
     },
@@ -198,7 +220,9 @@ ruleTester.run('no-object-type-as-default-prop', rule, {
             g = new Thing(),
             h = <Thing />,
             i = Symbol('foo')
-          }) => {}
+          }) => {
+            return null;
+          }
         `,
       errors: expectedViolations,
       parser: parsers.TYPESCRIPT_ESLINT,
